@@ -27,7 +27,7 @@
 
 - name: Copy SSL enterprise certificates 
   copy:
-      src: "{{ role_path }}/files/ssl/company"
+      src: "{{ role_path }}/files/ssl"
       dest: /etc/ssl/
       owner: root
       mode: 600
