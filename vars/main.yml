@@ -1,0 +1,8 @@
+---
+# vars file for common
+ssh_users:
+  - name: dummy
+    comment: Dummy User
+    key: "qwerty"
+    password: "qwerty"
+    state: absent

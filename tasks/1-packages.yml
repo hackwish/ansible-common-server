@@ -1,0 +1,102 @@
+---
+
+- name: Install dependencies
+  package: 
+    name:
+      - acl
+      - automake 
+      - bridge-utils
+      - ca-certificates
+      # - ccze
+      - cmake
+      - curl
+      - figlet
+      - git
+      - htop
+      - iotop
+      - iptstate
+      - lldpd
+      - make
+      - multitail
+      - nano
+      - ncdu
+      - nmap
+      - nmon
+      - ntp
+      - ntpdate
+      - openssh-server
+      - postfix
+      - pv
+      - python-setuptools
+      - python-simplejson
+      - python-yaml
+      - screen
+      - smartmontools
+      - sshfs
+      - stress
+      - sudo
+      - sysstat
+      - tinyca
+      - vim
+    state: present
+
+- name: Instala paquetes RHEL common
+  yum: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - libc-client-devel
+      - libmcrypt
+      - libmcrypt-devel
+      - libtool-ltdl-devel
+      - lm_sensors
+      - lshw.x86_64
+      - openssl-devel.x86_64
+      - pigz.x86_64
+      - redhat-lsb
+      - sysbench.x86_64
+      - system-config-firewall-tui
+      - telnet.x86_64
+      - xmlsec1-openssl.x86_64
+  register: common_yum
+  tags: common
+  when: ansible_os_family == "RedHat"
+
+- name: Instala paquetes Debian common
+  apt: 
+    name: "{{ packages }}"
+    state: present
+  vars:
+    packages:
+      - ansiweather
+      - apt-transport-https
+      - aptitude
+      - autoconf
+      - bc
+      - build-essential
+      - checkinstall 
+      - dirmngr
+      - gcc
+      - gnupg2
+      - inxi
+      - iptables-persistent
+      - libffi-dev
+      - libfile-tee-perl
+      - libssl-dev
+      - libtool
+      - libxml2-dev
+      - libxslt-dev
+      - lsb-release
+      - multipath-tools
+      - neofetch
+      - netcat-openbsd
+      - pigz
+      # - python-dev
+      # - python-is-python3
+      - pkg-config
+      - screenfetch
+      - software-properties-common
+  register: common_apt
+  tags: common
+  when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"

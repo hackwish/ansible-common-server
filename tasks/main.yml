@@ -1,0 +1,47 @@
+---
+- include: 0-upgrade.yml
+  tags: upgrade
+
+- include: 1-packages.yml
+  tags: packages
+
+- include: 2-locales.yml
+  tags: locales
+
+- include: 3-additional-tasks.yml
+  tags: additional-tasks
+
+- include: 4-sysctl.yml
+  tags: sysctl
+
+- include: 5-ulimit.yml
+  tags: ulimit
+
+- include: 6-timezone.yml
+  tags: timezone
+
+- include: 7-motd.yml
+  tags: motd
+
+- include: 8-certificates.yml
+  tags: certificates
+
+- include: 9-users_groups.yml
+  tags: users_groups
+
+- include: 10-users.yml
+  tags: users
+
+- include: 11-ssh_user.yml
+  tags: ssh_users
+
+- include: 12-iptables.yml
+  tags: iptables
+
+# - include: fail2ban.yml
+#   tags: fail2ban
+
+- include: 13-sshd.yml
+  tags: sshd
+
+

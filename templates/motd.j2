@@ -1,0 +1,16 @@
+
+======================================================
+{% for item in motd_info_head %}
+{{ item }}
+{% endfor %}
+
+{% for item in motd_ascii_art %}
+{{ item }}
+{% endfor %}
+
+{% for item in motd_info %}
+{% for key, value in item.items() %}
+{{ key }}{{ value }}
+{% endfor %}
+{% endfor %}
+======================================================
