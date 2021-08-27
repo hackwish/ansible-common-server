@@ -33,3 +33,4 @@
       mode: 600
       remote_src: no
       directory_mode: yes
+  ignore_errors: true
