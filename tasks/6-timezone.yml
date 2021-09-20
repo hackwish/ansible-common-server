@@ -1,17 +1,43 @@
 ---
-#NTP
-- name: Ensure NTP-related packages are installed.
-  package:
-    name: ntp
-    state: present
+- name: Install dependencies
+  apt: 
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - ntp
+      - ntpdate
+      - tzdata
+    update_cache: yes
+  tags: timezone
 
-- name: Ensure tzdata package is installed (Linux).
-  package:
-    name: tzdata
-    state: present
-  when: ansible_system == "Linux"
+- name: Copy NTP drift
+  template:
+    src: ntp.drift.j2
+    dest: /var/lib/ntp/ntp.drift
+  tags: timezone
 
 #TZDATA
 - name: set timezone
   timezone:
     name: America/Santiago
+  tags: timezone
+
+#IP TABLES RULES
+- name: Firewall rule - allow port 123 traffic
+  iptables:
+    chain: INPUT
+    destination_port: '123'
+    jump: ACCEPT
+    protocol: udp
+  tags: timezone
+
+- name: Firewall rule - Accept new connection from port 123
+  iptables:
+    chain: INPUT
+    protocol: udp
+    destination_port: '123'
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+    comment: Accept new SSH connections.
+  tags: timezone

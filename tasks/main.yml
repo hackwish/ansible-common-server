@@ -17,6 +17,9 @@
 - include: 5-ulimit.yml
   tags: ulimit
 
+- include: 5-iptables.yml
+  tags: iptables
+
 - include: 6-timezone.yml
   tags: timezone
 
@@ -34,9 +37,6 @@
 
 - include: 11-ssh_user.yml
   tags: ssh_users
-
-- include: 12-iptables.yml
-  tags: iptables
 
 # - include: fail2ban.yml
 #   tags: fail2ban

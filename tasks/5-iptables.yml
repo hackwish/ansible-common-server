@@ -37,13 +37,6 @@
 #     jump: DROP
 #     protocol: tcp
 
-- name: Firewall rule - allow port 123/ntp traffic
-  iptables:
-    chain: INPUT
-    destination_port: '123'
-    jump: ACCEPT
-    protocol: udp
-
 - name: Firewall rule - allow port SSH traffic
   iptables:
     chain: INPUT
