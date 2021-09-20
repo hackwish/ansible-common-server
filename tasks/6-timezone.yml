@@ -37,7 +37,7 @@
     protocol: udp
     destination_port: '123'
     ctstate: NEW
-    syn: match
+    # syn: match
     jump: ACCEPT
     comment: Accept new SSH connections.
   tags: timezone
