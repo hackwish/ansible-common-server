@@ -4,10 +4,12 @@
   package:
     name: iptables
     state: latest
+  tags: iptables
 
 - name: Flush existing firewall rules
   iptables:
     flush: true
+  tags: iptables
 
 #GENERAL RULES
 - name: Firewall rule - allow all loopback traffic
@@ -16,33 +18,51 @@
     chain: INPUT
     in_interface: lo
     jump: ACCEPT
+  tags: iptables
+
+- name: Firewall rule - allow all loopback traffic
+  iptables:
+    action: append
+    chain: OUTPUT
+    out_interface: lo
+    jump: ACCEPT
+  tags: iptables
 
 - name: Firewall rule - allow established connections
   iptables:
     chain: INPUT
     ctstate: ESTABLISHED,RELATED
     jump: ACCEPT
+  tags: iptables
 
-#IP TABLES RULES
-- name: Firewall rule - BLOCK port ping traffic
+- name: Firewall rule - allow output established connections
+  iptables:
+    chain: OUTPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+  tags: iptables
+
+## PING
+- name: Firewall rule - ALLOW port ping traffic
   iptables:
     chain: INPUT
     jump: ACCEPT
     protocol: icmp
 
-# - name: Firewall rule - BLOCK port 22/SSH traffic
-#   iptables:
-#     chain: INPUT
-#     destination_port: 22
-#     jump: DROP
-#     protocol: tcp
+- name: Firewall rule - ALLOW port ping traffic output
+  iptables:
+    chain: OUTPUT
+    jump: ACCEPT
+    protocol: icmp
 
+## SSH
 - name: Firewall rule - allow port SSH traffic
   iptables:
     chain: INPUT
     destination_port: "{{ ssh_port }}"
     jump: ACCEPT
     protocol: tcp
+  tags: iptables
 
 - name: Firewall rule - Accept new connection from port SSH
   iptables:
@@ -53,22 +73,67 @@
     syn: match
     jump: ACCEPT
     comment: Accept new SSH connections.
+  tags: iptables
 
-# # Reject tcp with tcp-reset
-# - iptables:
-#     chain: INPUT
-#     protocol: tcp
-#     reject_with: tcp-reset
-#     ip_version: ipv4
-
-# Set tcp flags
-# Allow new incoming SYN packets on TCP.
-# - iptables:
-#     chain: INPUT
-#     protocol: tcp
+## DNS
+# - name: Firewall rule - Accept new connection from port DNS UDP
+#   iptables:
+#     chain: OUTPUT
+#     protocol: udp
+#     destination_port: "53"
 #     ctstate: NEW
-#     syn: match
 #     jump: ACCEPT
+#     comment: Accept new Outbound DNS connections.
+#   tags: iptables
+
+# - name: Firewall rule - Accept new connection from port DNS TCP
+#   iptables:
+#     chain: OUTPUT
+#     protocol: tcp
+#     destination_port: "53"
+#     ctstate: NEW
+#     jump: ACCEPT
+#     comment: Accept new Outbound DNS connections.
+#   tags: iptables
+
+## HTTP
+# - name: Firewall rule - Accept new connection from port 80
+#   iptables:
+#     chain: OUTPUT
+#     protocol: tcp
+#     destination_port: "80"
+#     ctstate: NEW
+#     jump: ACCEPT
+#     comment: Accept new Outbound HTTP connections.
+#   tags: iptables
+
+# - name: Firewall rule - Accept new connection from port 443
+#   iptables:
+#     chain: OUTPUT
+#     protocol: tcp
+#     destination_port: "443"
+#     ctstate: NEW
+#     jump: ACCEPT
+#     comment: Accept new Outbound HTTPS connections.
+#   tags: iptables
+
+# SECURITY RULES
+- name: Reject tcp with tcp-reset
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    reject_with: tcp-reset
+    ip_version: ipv4
+  tags: iptables
+
+- name: Allow new incoming SYN packets on TCP.
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    ctstate: NEW
+    syn: match
+    jump: ACCEPT
+  tags: iptables
 
 - name: Firewall rule - Drop some possible attacks
   iptables:
@@ -82,6 +147,7 @@
         - RST
         - SYN
         - FIN
+  tags: iptables
 
 # Tag all outbound tcp packets with DSCP DiffServ class CS1
 - name: Tag all outbound tcp packets with DSCP DiffServ class CS1
@@ -91,6 +157,7 @@
     table: mangle
     set_dscp_mark_class: CS6
     protocol: tcp
+  tags: iptables
 
 # Set tcp flags
 - name: Set tcp flags
@@ -105,6 +172,7 @@
         - RST
         - SYN
         - FIN
+  tags: iptables
 
 - name: Set tcp flags
   iptables:
@@ -118,10 +186,26 @@
         - RST
         - SYN
         - FIN
+  tags: iptables
 
 #IP TABLES DROP ALL       
-- name: Firewall rule - drop any traffic without rule
-  iptables:
-    chain: INPUT
-    jump: DROP
-    rule_num: '100'    
+# - name: Firewall rule - drop any INPUT traffic without rule
+#   iptables:
+#     chain: INPUT
+#     jump: DROP
+#     rule_num: '100'    
+#   tags: iptables
+
+# - name: Firewall rule - drop any OUTPUT traffic without rule
+#   iptables:
+#     chain: OUTPUT
+#     jump: DROP
+#     rule_num: '100'    
+#   tags: iptables
+
+# - name: Firewall rule - drop any FORWARD traffic without rule
+#   iptables:
+#     chain: FORWARD
+#     jump: DROP
+#     rule_num: '100'    
+#   tags: iptables

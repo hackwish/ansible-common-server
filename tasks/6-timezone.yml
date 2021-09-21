@@ -31,13 +31,13 @@
     protocol: udp
   tags: timezone
 
-- name: Firewall rule - Accept new connection from port 123
-  iptables:
-    chain: INPUT
-    protocol: udp
-    destination_port: '123'
-    ctstate: NEW
-    # syn: match
-    jump: ACCEPT
-    comment: Accept new SSH connections.
-  tags: timezone
+# - name: Firewall rule - Accept new connection from port 123
+#   iptables:
+#     chain: INPUT
+#     protocol: udp
+#     destination_port: '123'
+#     ctstate: NEW
+#     # syn: match
+#     jump: ACCEPT
+#     comment: Accept new SSH connections.
+#   tags: timezone
