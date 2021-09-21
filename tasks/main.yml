@@ -35,13 +35,13 @@
 - include: 10-users.yml
   tags: users
 
-- include: 11-ssh_user.yml
-  tags: ssh_users
+# - include: 11-ssh_user.yml
+#   tags: ssh_users
 
 # - include: fail2ban.yml
 #   tags: fail2ban
 
-- include: 13-sshd.yml
-  tags: sshd
+# - include: 13-sshd.yml
+#   tags: sshd
 
 
