@@ -18,3 +18,7 @@
 .sync-*
 ansible_server_key
 
+CHANGELOG.md
+*sync-conflict*
+*.old
+*.off
