@@ -1,12 +1,6 @@
----
 # handlers file for common
-- name: restart sshd
-  service: 
-    name: sshd 
-    state: restarted
-
 - name: rebuild locales database
   command: "{{ item }}"
   with_items:
-    - dpkg-reconfigure locales -f noninteractive
-    - /usr/sbin/locale-gen
+  - dpkg-reconfigure locales -f noninteractive
+  - /usr/sbin/locale-gen

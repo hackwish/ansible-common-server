@@ -1,0 +1,210 @@
+- name: Install dependencies
+  package:
+    name:
+    - acl
+    - apt-transport-https
+    - apt-xapian-index
+    - aptitude
+    - autoconf
+    - automake
+    - awscli
+    - bridge-utils
+    - ca-certificates
+    - ccze
+    - cmake
+    - cuetools
+    - curl
+    - exa
+    - fdupes
+    - ffmpeg
+    - figlet
+    - flac
+    - flatpak
+    - fpc
+    - g++
+    - gcc
+    - git
+    - gnupg2
+    - golang-go
+    - google-cloud-sdk
+    - google-cloud-sdk-anthos-auth
+    - google-cloud-sdk-gke-gcloud-auth-plugin
+    - google-cloud-sdk-kubectl-oidc
+    - gparted
+    - hardinfo
+    - htop
+    - httpie
+    - iftop
+    - intel-microcode
+    - iotop
+    - iptables-persistent
+    - iptstate
+    - jq
+    - kubectl
+    - lldpd
+    - lm-sensors
+    - lsb-release
+    - lshw
+    - mailutils
+    - make
+    - mat
+    - mat2
+    - memtester
+    - multitail
+    - nano
+    - ncdu
+    - netcat
+    - netcat-openbsd
+    - nmap
+    - nmon
+    - ntp
+    - ntpdate
+    - nvidia-cuda-dev
+    - nvidia-cuda-toolkit
+    - openfortivpn
+    - openssh-client
+    - openssh-server
+    - openvpn
+    - p7zip-full
+    - p7zip-rar
+    - pigz
+    - postfix
+    - powertop
+    - preload
+    - psensor
+    - pv
+    - python3-dev
+    - python3-systemd
+    - python3-venv
+    - pwgen
+    - qemu-kvm
+    - radeontop
+    - rar
+    - rbenv
+    - ruby-dev
+    - ruby-full
+    - screen
+    - sharutils
+    - shntool
+    - siege
+    - smartmontools
+    - snapd
+    - snmp
+    - snmp-mibs-downloader
+    - snmpd
+    - software-properties-common
+    - ssh-askpass
+    - sshfs
+    - sshuttle
+    - stress
+    - subversion
+    - sudo
+    - swaks
+    - sysstat
+    - tcpdump
+    - telnetd
+    - tlp
+    - tmux
+    - unace
+    - unixodbc-dev
+    - unrar
+    - unzip
+    - uuid-runtime
+    - vim
+    - vim-common
+    - wavpack
+    - whois
+    - xinetd
+    - yarn
+    - zip
+    - zlib1g-dev
+    - zsh
+    state: present
+
+# - name: Instala paquetes RHEL common
+#   yum:
+#     name: "{{ packages }}"
+#     state: present
+#   vars:
+#     packages:
+#     - libc-client-devel
+#     - libmcrypt
+#     - libmcrypt-devel
+#     - libtool-ltdl-devel
+#     - lm_sensors
+#     - lshw.x86_64
+#     - openssl-devel.x86_64
+#     - pigz.x86_64
+#     - redhat-lsb
+#     - sysbench.x86_64
+#     - system-config-firewall-tui
+#     - telnet.x86_64
+#     - xmlsec1-openssl.x86_64
+#   register: common_yum
+#   tags: common
+#   when: ansible_os_family == "RedHat"
+
+# - name: Instala paquetes Debian common
+#   apt:
+#     name: "{{ packages }}"
+#     state: present
+#     install_recommends: no
+#   vars:
+#     packages:
+#     - ansiweather
+#     - apt-transport-https
+#     - aptitude
+#     - autoconf
+#     - bc
+#     - build-essential
+#     - checkinstall
+#     - dirmngr
+#     - gcc
+#     - gnupg2
+#     - inxi
+#     - iptables-persistent
+#     - libffi-dev
+#     - libfile-tee-perl
+#     - libssl-dev
+#     - libtool
+#     - libxml2-dev
+#     - libxslt-dev
+#     - lsb-release
+#     - multipath-tools
+#     - neofetch
+#     - netcat-openbsd
+#     - pigz
+#     # - python-dev
+#     # - python-is-python3
+#     - pkg-config
+#     - screenfetch
+#     - software-properties-common
+#   register: common_apt
+#   tags: common
+#   when: ansible_os_family == "Debian" or ansible_os_family == "Ubuntu"
+
+- name: Instala packages adicionales
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - linux-headers-generic
+    - python-packaging
+    - language-pack-es
+    state: present
+  register: common_aditional_installation
+  ignore_errors: true
+  when: ansible_distribution == 'Ubuntu'
+
+
+- name: Ensure python OpenSSL dependencies are installed.
+  pip:
+    name:
+    - pyOpenSSL
+    - cryptography
+    - virtualenv
+    - setuptools
+    executable: pip3
+    state: present
+  delegate_to: localhost
+  become: false
