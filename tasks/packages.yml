@@ -55,6 +55,7 @@
     - ncdu
     - netcat
     - netcat-openbsd
+    - nfs-common
     - nmap
     - nmon
     - ntp
