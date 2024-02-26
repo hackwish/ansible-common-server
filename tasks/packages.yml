@@ -7,7 +7,7 @@
     - aptitude
     - autoconf
     - automake
-    - awscli
+    # - awscli
     - bridge-utils
     - ca-certificates
     - ccze
@@ -26,21 +26,21 @@
     - git
     - gnupg2
     - golang-go
-    - google-cloud-sdk
-    - google-cloud-sdk-anthos-auth
-    - google-cloud-sdk-gke-gcloud-auth-plugin
-    - google-cloud-sdk-kubectl-oidc
+    # - google-cloud-sdk
+    # - google-cloud-sdk-anthos-auth
+    # - google-cloud-sdk-gke-gcloud-auth-plugin
+    # - google-cloud-sdk-kubectl-oidc
     - gparted
     - hardinfo
     - htop
     - httpie
     - iftop
-    - intel-microcode
+    # - intel-microcode x86
     - iotop
     - iptables-persistent
     - iptstate
     - jq
-    - kubectl
+    # - kubectl
     - lldpd
     - lm-sensors
     - lsb-release
@@ -62,7 +62,7 @@
     - ntpdate
     - nvidia-cuda-dev
     - nvidia-cuda-toolkit
-    - openfortivpn
+    # - openfortivpn
     - openssh-client
     - openssh-server
     - openvpn
