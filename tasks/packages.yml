@@ -80,7 +80,7 @@
     - pwgen
     - qemu-kvm
     - radeontop
-    - rar
+    # - rar
     - rbenv
     - ruby-dev
     - ruby-full

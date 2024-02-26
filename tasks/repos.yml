@@ -16,16 +16,16 @@
     codename: '{{ codename }}'
     update_cache: no
 
-#GCLOUD SDK
-- name: Add Repo GCloud SDK
-  apt_key:
-    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    keyring: /usr/share/keyrings/cloud.google.gpg
-    state: present
-- apt_repository:
-    repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
-    state: present
-    update_cache: no
+# #GCLOUD SDK
+# - name: Add Repo GCloud SDK
+#   apt_key:
+#     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+#     keyring: /usr/share/keyrings/cloud.google.gpg
+#     state: absent
+# - apt_repository:
+#     repo: deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main
+#     state: absent
+#     update_cache: no
 
 - name: apt-get update
   shell: apt-get update
