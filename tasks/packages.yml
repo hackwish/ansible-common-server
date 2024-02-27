@@ -208,4 +208,5 @@
     executable: pip3
     state: present
   delegate_to: localhost
-  become: false
+  become:
+  ignore_errors: true
