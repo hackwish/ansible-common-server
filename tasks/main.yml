@@ -7,11 +7,8 @@
 - include: upgrade.yml
   tags: upgrade
 
-- include: locales.yml
-  tags: locales
+# - include: locales.yml
+#   tags: locales
 
 - include: motd.yml
   tags: motd
-
-- include: certificates.yml
-  tags: certificates
