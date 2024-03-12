@@ -62,8 +62,8 @@
     - nmon
     - ntp
     - ntpdate
-    - nvidia-cuda-dev
-    - nvidia-cuda-toolkit
+    # - nvidia-cuda-dev
+    # - nvidia-cuda-toolkit
     - openssh-client
     - openssh-server
     - openvpn
