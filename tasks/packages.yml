@@ -198,15 +198,15 @@
   when: ansible_distribution == 'Ubuntu'
 
 
-- name: Ensure python OpenSSL dependencies are installed.
-  pip:
-    name:
-    - pyOpenSSL
-    - cryptography
-    - virtualenv
-    - setuptools
-    executable: pip3
-    state: present
-  delegate_to: localhost
-  become:
-  ignore_errors: true
+# - name: Ensure python OpenSSL dependencies are installed.
+#   pip:
+#     name:
+#     - pyOpenSSL
+#     - cryptography
+#     - virtualenv
+#     - setuptools
+#     executable: pip3
+#     state: present
+#   delegate_to: localhost
+#   become:
+#   ignore_errors: true
