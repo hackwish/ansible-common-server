@@ -4,8 +4,8 @@
 - include: packages.yml
   tags: packages
 
-- include: upgrade.yml
-  tags: upgrade
+# - include: upgrade.yml
+#   tags: upgrade
 
 # - include: locales.yml
 #   tags: locales
