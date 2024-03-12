@@ -22,7 +22,7 @@
     - cmake
     - cuetools
     - curl
-    - exa
+    # - exa
     - fdupes
     - ffmpeg
     - figlet
