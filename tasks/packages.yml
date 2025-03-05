@@ -49,7 +49,7 @@
     - lshw
     - mailutils
     - make
-    - mat
+    # - mat
     - mat2
     - memtester
     - multitail
