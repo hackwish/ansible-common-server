@@ -55,7 +55,7 @@
     - multitail
     - nano
     - ncdu
-    - netcat
+    #- netcat
     - netcat-openbsd
     - nfs-common
     - nmap
